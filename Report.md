@@ -50,7 +50,7 @@ This is the starting point to construct our system.
 
 The newly created system contains a clock and Reset submodule. Note that in the  _Export_  column we have two signals (`clk`  and`reset`) that are exported which means that we will be able to connect them to the clock and reset source in the RTL top design.
 
-# Adding IP blocs
+# Adding IP blocks
 
 The left lateral pane of the Platform Designer window should contain an  `IP Catalog`  tab. This represents the Library of IPs that are available and hat we can use in our design. The different blocks are organized in browsable categories and a search field helps to find specific blocks. 
 
