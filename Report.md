@@ -4,7 +4,7 @@ The purpose of this section is to use Quartus® Prime Standard Edition 23.1 and 
 
 ## Target System
 
-![enter image description here](https://raw.githubusercontent.com/trungnl2000/Fig-of-SE209/918b5b9988e86c139cc039e976c068d27d6b396a/niosv_system_top_level.png)
+![enter image description here](https://raw.githubusercontent.com/NVChienSetHust/Fig-of-SE209/918b5b9988e86c139cc039e976c068d27d6b396a/niosv_system_top_level.png)
 
 It is composed of the following elements:
 
@@ -39,12 +39,12 @@ To simplify integration with the FPGA synthesis stream, we start from a pre-buil
 
 Once the archive is unzipped, you can open the project in the  _Quartus® Prime Standard Edition 23.1_  software:
 ```File -> Open Project... -> Navigate to DE1_SoC.qpf -> Open```
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/Open%20Project%20in%20quartus.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/Open%20Project%20in%20quartus.png?raw=true)
 This project contains a unique RTL (`DE1-SoC.sv`) file with the Inputs/Outputs definitions. Some outputs have been assigned to constant values (for example, the LEDs are turned off). This module (`DE1_SoC`) is the top level block of our design and will contain later the SoC system that we will design in _Platform Designer_.
 
 To open _Platform Designer_, from the _Tools_ menu, select _Platform Designer_. This will create an empty integration project and should look as follows.
 
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/empty%20project%20in%20platform%20designer.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/empty%20project%20in%20platform%20designer.png?raw=true)
 
 This is the starting point to construct our system.
 
@@ -56,9 +56,9 @@ The left lateral pane of the Platform Designer window should contain an  `IP Cat
 
 ## Adding the Processor Core
 The first element that we will add is the `Nios V/m` processor. You can find it in the `Processors and Peripheral/Embedded Processors` section. Or by simply typing Nios V in the search bar, and double click on *Nios V/m Microcontroller Intel FPGA IP*. 
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/niosv%20search.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/niosv%20search.png?raw=true)
 Then, a window appear, make sure check the option *Enable Reset from Debug Module*.
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/Add%20NiosV.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/Add%20NiosV.png?raw=true)
 
 ## Adding the On-Chip Memory block
 The second element that we will integrate in the design is an On-Chip Memory. It can be found in the  `Basic Function` or by typing "ram" in the search bar.
@@ -67,7 +67,7 @@ This IP will use the FPGA embedded memory block and as they can be initialized w
 
 Change the Total Memory Size configuration to 128 KB as shown in the following figure. This will allow using a simple C library with the  `printf`  function.
 
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/add%20ram.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/add%20ram.png?raw=true)
 ## Adding the GPIO controllers
 
 Then we add two General Purpose Input/Output controllers (search for  `Parallel I/O (PIO)`). The PIO IP can be configured in width and direction.
@@ -85,7 +85,7 @@ The second PIO will be connected to the 10 switches (`sw`  signal in the RTL top
 This last element can be found in  `Serial`  subsection of  `Interface Protocols`  section. Keep the default configuration this time.
 
 After that, the schematic of our system should look like in the following figure:
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/raw%20schematic.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/raw%20schematic.png?raw=true)
 
 # Connecting the different elements
 
@@ -102,7 +102,7 @@ Here are the connections that we want to have in our system:
 -   Connect the  `irq`  (interrupt request) output from the JTAG UART to the processor interrupt receiver.
 
 All connections done, the connection’s matrix should look as follows.
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/connected%20schematic.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/connected%20schematic.png?raw=true)
 
 **Remarks**
 
@@ -123,7 +123,7 @@ We want to keep the base address of the On-chip Memory at the value  `0`  even w
 
 The final address mapping should look like the following (some differences can exist depending on the order of appearance of the different IPs).
 
-![enter image description here](https://raw.githubusercontent.com/trungnl2000/Fig-of-SE209/main/assigned%20base%20adress%20schematic.png)
+![enter image description here](https://raw.githubusercontent.com/NVChienSetHust/Fig-of-SE209/main/assigned%20base%20adress%20schematic.png)
 
 ## Defining the reset and exception vectors of the processor
 
@@ -133,7 +133,7 @@ By double-clicking on the processor in the main window, the configuration pane s
 
 Here, we choose the On-Chip Memory (SRAM.s1) instead of giving an absolute value, as it allows to change the mapping and size of the memory without loosing track:
 
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/set%20vector%20offset%20cpu.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/set%20vector%20offset%20cpu.png?raw=true)
 
 Normally, at this step, you should not have any error or warning message.
 
@@ -143,7 +143,7 @@ The inputs and outputs from the two GPIO controllers needs to be connected to th
 
 In the main pane, for each PIO, you can export the external connection, by double-clicking in the export column. There, you can choose a explicit name, for example, here  `leds`  and  `sw`  as it is shown in the following figure.
 
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/exported%20IO.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/exported%20IO.png?raw=true)
 
 # Saving the project and generating the RTL
 
@@ -151,18 +151,18 @@ The last step, before going back to Quartus and synthesising the design, is to g
 
 The first thing to do, is saving the project by choosing the  `Save`  item in the  `File`  menu. Here you can choose a explicit name for the system you have build (for example  `niosv_system`).
 
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/saved%20schematic.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/saved%20schematic.png?raw=true)
 
 To generate the RTL, choose the  `Generate HDL`  from the  `Generate`  menu.
 
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/generate%20schematic.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/generate%20schematic.png?raw=true)
 
 A directory with the same name as your system will be created in the Quartus project directory. Take some time to analyse the content of this directory.
 
 # Integration with the Quartus project and test on the board
 
 You can now quit Platform Designer. A message will give you instructions on how to add the design to the Quartus Project:
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/missing%20ip.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/missing%20ip.png?raw=true)
 To add the new IP Variation to your project: In Quartus, select `Add/Remove files in project...` from the `Project` menu. Open the file chooser by clicking on the `...` icon and choose the `.qip`  file (only the `.qip` file) corresponding to your system as described in the figure above.
 
 Once done, you must modify the top level Verilog file by adding an instance of the system. A  `_inst.v`  file (`niosv_system/niosv_system_inst.v`) should have also been created with an example of how to instantiate your design.
@@ -191,7 +191,7 @@ Once the instance is added, you can compile the design in Quartus by press `Ctrl
 
 This section provides the design flow to generate and build a Nios V/m processor software project. Steps on how to generate an Application and Board Support Package (BSP) project using the `niosv-app` and `nios-bsp` utilities are provided.
 
-## Generating the Board Support Package
+## Generating the Board Support Package and programming
 **Step 1:** Open niosv shell: Open a new terminal window by using `niosv-shell` provided by our school:
 
 `/comelec/softs/opt/altera/altera23.1std/niosv/bin/niosv-shell`
@@ -228,29 +228,35 @@ In this tutorial, RiscFree IDE will be used. It is a tool created by Ashling Mic
 Make sure to run this command within niosv-shell
 **Step 6:** Choose workspace:
 Navigate to the created software folder:
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/riscfree%20workspace.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/riscfree%20workspace.png?raw=true)
 **Step 7:**  Create a new project
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/create%20c%20project.png?raw=true)
-![enter image description here](https://raw.githubusercontent.com/trungnl2000/Fig-of-SE209/main/create%20riscfree%20project.png)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/create%20c%20project.png?raw=true)
+![enter image description here](https://raw.githubusercontent.com/NVChienSetHust/Fig-of-SE209/main/create%20riscfree%20project.png)
 **Step 8:** Finish the program:
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/code%20c%20in%20riscfree.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/code%20c%20in%20riscfree.png?raw=true)
 **Remark:** `0x00030050` and `0x00030040` are the addresses assigned to the LEDS and SW modules, respectively, by Platform Designer in the previous step (Change them if you have different addresses).
 
-**Step 9:** Left click on project (here is `app`), choose `Build Project`
+**Step 9:** Right click on project (here is `app`), choose `Build Project`
 **Step 10:** Go back to Quartus, select `Programmer` in the `Tools` menu, a new window appears, then follow the instructions in the following figures to re-program your kit. Make sure to connect it to your computer before doing anything:
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/reconfig%20fpga%20step2.png?raw=true)
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/reconfig%20fpga%20step3.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/reconfig%20fpga%20step2.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/reconfig%20fpga%20step3.png?raw=true)
 
 > 2: Double click on DE-SoC
 
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/reconfig%20fpga%20step4.png?raw=true)
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/reconfig%20fpga%20step6.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/reconfig%20fpga%20step4.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/reconfig%20fpga%20step6.png?raw=true)
 > 7: Double click and navigate to DE1_SoC.sof, which was generated by the compilation process in Quartus.
 
-**Step 11:** Go back to RiscFree IDE, `left click on the project (here is app) -> Run As -> 3 Ashling RISC-V Hardware Debugging`, then follow:
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/choose%20elf%20file%20in%20riscfree.png?raw=true)
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/choose%20debugger.png?raw=true)
+**Step 11:** Go back to RiscFree IDE, `right click on the project (here is app) -> Run As -> 3 Ashling RISC-V Hardware Debugging`, then follow:
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/choose%20elf%20file%20in%20riscfree.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/choose%20debugger.png?raw=true)
 **Step 12:** At this step, you can turn the switches on and off to check the behavior of the LEDs. If you want to see the program's output on the terminal, open a new terminal tab and use: `/comelec/softs/opt/altera/altera23.1std/quartus/bin/juart-terminal`
 
 You should see the following result:
-![enter image description here](https://github.com/trungnl2000/Fig-of-SE209/blob/main/result.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/result.png?raw=true)
+
+**Step 13:** Add a breakpoint and debug the test program by double-clicking on the left of the code line where you want to add the breakpoint then `right click on the project (here is app) -> Debug As -> 3 Ashling RISC-V Hardware Debugging`
+
+Here we add a breakpoint at `printf` funtion. After starting the debugging process, the program stop at `printf` funtion and the terminal does not print anything. If we resume the program, it will execute `print` funtion as usual.
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/debug_print_breakpoint_before.png?raw=true)
+![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/debug_print_breakpoint_after.png?raw=true)
