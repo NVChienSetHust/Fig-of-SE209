@@ -2,8 +2,9 @@
 
 This tutorial provides the guidelines for replacing Nios II processor by Nios V processor by using Quartus® Prime Standard Edition 23.1 and creating a basic system with the NiosV/m as the control CPU.
 
-## Key Differences
+This document based on [AN 978: Nios® V Processor Migration Guidelines ](https://cdrdv2-public.intel.com/773197/an-773196-773197.pdf)
 
+## Key Differences
 Architecture:
 -   **Nios II:** Proprietary 32-bit RISC architecture.
 -   **Nios V:** Based on the open standard RISC-V ISA.
@@ -361,3 +362,4 @@ Here we add a breakpoint at `printf` funtion. After starting the debugging proce
 ![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/debug_print_breakpoint_before.png?raw=true)
 
 ![enter image description here](https://github.com/NVChienSetHust/Fig-of-SE209/blob/main/debug_print_breakpoint_after.png?raw=true)
+
